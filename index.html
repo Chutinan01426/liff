@@ -57,6 +57,8 @@
     }
 
     async function scanCode() {
+      const result = await liff.scanCode()
+      document.getElementById("scanCode").append(result.value)
     }
 
     function openWindow() {
@@ -92,8 +94,7 @@
       document.getElementById("userId").append(profile.userId)
       document.getElementById("statusMessage").append(profile.statusMessage)
       document.getElementById("displayName").append(profile.displayName)
-      document.getElementById("decodeIDToken").append(liff.getDecodedIDToken().email)
-
+      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
     }
 
     function getEnvironment() {
@@ -101,15 +102,14 @@
       document.getElementById("language").append(liff.getLanguage())
       document.getElementById("version").append(liff.getVersion())
       document.getElementById("accessToken").append(liff.getAccessToken())
-      document.getElementById("isInClient").append(liff.isInClient()) //เช็คว่าเปิดที่ไหน ถ้าเปิดใน Line ปุ่ม Logout จะซ้อน
-      if(liff.isInClient()){
+      document.getElementById("isInClient").append(liff.isInClient())
+      if (liff.isInClient()) {
         document.getElementById("btnLogOut").style.display = "none"
-      }else{
+      } else {
         document.getElementById("btnMsg").style.display = "none"
         document.getElementById("btnScanCode").style.display = "none"
         document.getElementById("btnClose").style.display = "none"
       }
-
     }
 
     async function main() {
