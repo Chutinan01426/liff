@@ -72,6 +72,13 @@
     }
 
     async function getUserProfile() {
+      const profile = await liff.getProfile()
+      document.getElementById("pictureUrl").src = profile.pictureUrl
+      document.getElementById("userId").append(profile.userId)
+      document.getElementById("statusMessage").append(profile.statusMessage)
+      document.getElementById("displayName").append(profile.displayName)
+
+
     }
 
     function getEnvironment() {
@@ -79,7 +86,7 @@
       document.getElementById("language").append(liff.getLanguage())
       document.getElementById("version").append(liff.getVersion())
       document.getElementById("accessToken").append(liff.getAccessToken())
-      document.getElementById("isInClient").append(liff.isInClient())
+      document.getElementById("isInClient").append(liff.isInClient()) //เช็คว่าเปิดที่ไหน ถ้าเปิดใน Line ปุ่ม Logout จะซ้อน
       if(liff.isInClient()){
         document.getElementById("btnLogOut").style.display = "none"
       }else{
@@ -94,7 +101,7 @@
       //alert("LINE Developers x Skooldio")
       await liff.init({ liffId: "1655257527-xR7BomzO" }) //เริ่มการทำงานของ Liff
       getEnvironment()
-      // getUserProfile()
+      getUserProfile()
       // getContext()
       // getFriendship()
       // createUniversalLink()
